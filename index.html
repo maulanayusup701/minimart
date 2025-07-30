@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshMart - Modern Minimart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'bounce-light': 'bounceLight 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        bounceLight: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">F</span>
+                    </div>
+                    <span
+                        class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">FreshMart</span>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#"
+                        class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Beranda</a>
+                    <a href="#"
+                        class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Kategori</a>
+                    <a href="#"
+                        class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Promo</a>
+                    <a href="#"
+                        class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Kontak</a>
+                </nav>
+
+                <!-- Search & Cart -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative hidden sm:block">
+                        <input type="text" placeholder="Cari produk..."
+                            class="w-64 px-4 py-2 pr-10 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200">
+                        <button
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-emerald-600 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4m15.6 0L7 13m0 0L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H19M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z">
+                            </path>
+                        </svg>
+                        <span
+                            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">3</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 text-white overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        <div class="absolute inset-0">
+            <!-- Animated background elements -->
+            <div class="absolute top-10 left-10 w-20 h-20 bg-white opacity-10 rounded-full animate-bounce-light"></div>
+            <div class="absolute bottom-20 right-20 w-16 h-16 bg-white opacity-10 rounded-full animate-pulse-slow">
+            </div>
+            <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-white opacity-5 rounded-full animate-bounce-light"
+                style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="relative container mx-auto px-4 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Belanja <span class="text-yellow-300">Fresh</span><br>
+                        Setiap Hari
+                    </h1>
+                    <p class="text-xl mb-8 text-emerald-50 leading-relaxed">
+                        Dapatkan produk segar berkualitas tinggi dengan harga terbaik.
+                        Pengalaman belanja modern untuk kebutuhan sehari-hari Anda.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button
+                            class="bg-white text-emerald-600 px-8 py-3 rounded-full font-semibold hover:bg-emerald-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            Mulai Belanja
+                        </button>
+                        <button
+                            class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-emerald-600 transition-all duration-300">
+                            Lihat Promo
+                        </button>
+                    </div>
+                </div>
+                <div class="animate-slide-up">
+                    <div class="relative">
+                        <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div
+                                    class="bg-white bg-opacity-30 rounded-2xl p-4 text-center hover:bg-opacity-40 transition-all duration-300 cursor-pointer">
+                                    <div class="text-3xl mb-2">🥬</div>
+                                    <p class="font-semibold">Sayuran Fresh</p>
+                                </div>
+                                <div
+                                    class="bg-white bg-opacity-30 rounded-2xl p-4 text-center hover:bg-opacity-40 transition-all duration-300 cursor-pointer">
+                                    <div class="text-3xl mb-2">🍎</div>
+                                    <p class="font-semibold">Buah Segar</p>
+                                </div>
+                                <div
+                                    class="bg-white bg-opacity-30 rounded-2xl p-4 text-center hover:bg-opacity-40 transition-all duration-300 cursor-pointer">
+                                    <div class="text-3xl mb-2">🥛</div>
+                                    <p class="font-semibold">Susu & Dairy</p>
+                                </div>
+                                <div
+                                    class="bg-white bg-opacity-30 rounded-2xl p-4 text-center hover:bg-opacity-40 transition-all duration-300 cursor-pointer">
+                                    <div class="text-3xl mb-2">🍞</div>
+                                    <p class="font-semibold">Roti & Snack</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="bg-white py-12 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center group">
+                    <div
+                        class="text-3xl font-bold text-emerald-600 mb-2 group-hover:scale-110 transition-transform duration-300">
+                        1000+</div>
+                    <p class="text-gray-600">Produk Tersedia</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="text-3xl font-bold text-emerald-600 mb-2 group-hover:scale-110 transition-transform duration-300">
+                        24/7</div>
+                    <p class="text-gray-600">Buka Setiap Hari</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="text-3xl font-bold text-emerald-600 mb-2 group-hover:scale-110 transition-transform duration-300">
+                        5★</div>
+                    <p class="text-gray-600">Rating Pelanggan</p>
+                </div>
+                <div class="text-center group">
+                    <div
+                        class="text-3xl font-bold text-emerald-600 mb-2 group-hover:scale-110 transition-transform duration-300">
+                        Free</div>
+                    <p class="text-gray-600">Ongkir Area Lokal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Produk Unggulan</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Pilihan terbaik dengan kualitas premium dan harga
+                    yang kompetitif</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div
+                    class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                    <div class="relative overflow-hidden">
+                        <div
+                            class="h-48 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-6xl">🥬</span>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            -15%</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2 text-gray-800">Sayuran Organik</h3>
+                        <p class="text-gray-600 text-sm mb-4">Sayuran segar langsung dari petani lokal</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-emerald-600">Rp 15.000</span>
+                                <span class="text-sm text-gray-400 line-through ml-2">Rp 18.000</span>
+                            </div>
+                            <button
+                                class="bg-emerald-600 text-white p-2 rounded-full hover:bg-emerald-700 transition-colors duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div
+                    class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                    <div class="relative overflow-hidden">
+                        <div
+                            class="h-48 bg-gradient-to-br from-red-100 to-pink-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-6xl">🍎</span>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 bg-emerald-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            Fresh</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2 text-gray-800">Apel Fuji Premium</h3>
+                        <p class="text-gray-600 text-sm mb-4">Apel import dengan rasa manis dan tekstur renyah</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-emerald-600">Rp 25.000</span>
+                                <span class="text-xs text-gray-500">/kg</span>
+                            </div>
+                            <button
+                                class="bg-emerald-600 text-white p-2 rounded-full hover:bg-emerald-700 transition-colors duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div
+                    class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                    <div class="relative overflow-hidden">
+                        <div
+                            class="h-48 bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-6xl">🥛</span>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            Best Seller</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2 text-gray-800">Susu Ultra Fresh</h3>
+                        <p class="text-gray-600 text-sm mb-4">Susu segar dengan kualitas terjamin dan bergizi tinggi</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-emerald-600">Rp 12.000</span>
+                                <span class="text-xs text-gray-500">/1L</span>
+                            </div>
+                            <button
+                                class="bg-emerald-600 text-white p-2 rounded-full hover:bg-emerald-700 transition-colors duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div
+                    class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                    <div class="relative overflow-hidden">
+                        <div
+                            class="h-48 bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                            <span class="text-6xl">🍞</span>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            Hot</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold text-lg mb-2 text-gray-800">Roti Gandum Sehat</h3>
+                        <p class="text-gray-600 text-sm mb-4">Roti gandum utuh dengan serat tinggi dan rendah gula</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-lg font-bold text-emerald-600">Rp 8.000</span>
+                                <span class="text-xs text-gray-500">/pack</span>
+                            </div>
+                            <button
+                                class="bg-emerald-600 text-white p-2 rounded-full hover:bg-emerald-700 transition-colors duration-200">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Jelajahi Kategori</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Temukan berbagai macam produk berkualitas dalam
+                    kategori pilihan</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="group cursor-pointer">
+                    <div
+                        class="bg-gradient-to-br from-green-100 to-emerald-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                        <div class="text-4xl mb-3 group-hover:animate-bounce">🥬</div>
+                        <h3 class="font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">Sayuran
+                        </h3>
+                        <p class="text-xs text-gray-500 mt-1">120+ items</p>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div
+                        class="bg-gradient-to-br from-red-100 to-pink-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                        <div class="text-4xl mb-3 group-hover:animate-bounce">🍎</div>
+                        <h3 class="font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">
+                            Buah-buahan</h3>
+                        <p class="text-xs text-gray-500 mt-1">85+ items</p>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div
+                        class="bg-gradient-to-br from-blue-100 to-cyan-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                        <div class="text-4xl mb-3 group-hover:animate-bounce">🥛</div>
+                        <h3 class="font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">Dairy
+                        </h3>
+                        <p class="text-xs text-gray-500 mt-1">45+ items</p>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div
+                        class="bg-gradient-to-br from-yellow-100 to-orange-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                        <div class="text-4xl mb-3 group-hover:animate-bounce">🍞</div>
+                        <h3 class="font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">Roti &
+                            Kue</h3>
+                        <p class="text-xs text-gray-500 mt-1">60+ items</p>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div
+                        class="bg-gradient-to-br from-purple-100 to-indigo-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                        <div class="text-4xl mb-3 group-hover:animate-bounce">🥤</div>
+                        <h3 class="font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">Minuman
+                        </h3>
+                        <p class="text-xs text-gray-500 mt-1">75+ items</p>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer">
+                    <div
+                        class="bg-gradient-to-br from-amber-100 to-yellow-200 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+                        <div class="text-4xl mb-3 group-hover:animate-bounce">🍿</div>
+                        <h3 class="font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">Snack
+                        </h3>
+                        <p class="text-xs text-gray-500 mt-1">95+ items</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="py-16 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Penawaran Spesial</h2>
+                <p class="text-purple-100 text-lg">Jangan lewatkan promo menarik hari ini!</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div
+                    class="bg-white bg-opacity-20 backdrop-blur-sm rounded-3xl p-8 hover:bg-opacity-30 transition-all duration-300">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Diskon 30%</h3>
+                            <p class="text-purple-100">Untuk semua produk buah-buahan</p>
+                        </div>
+                        <div class="text-6xl">🍓</div>
+                    </div>
+                    <button
+                        class="bg-white text-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-purple-50 transition-colors duration-200">
+                        Claim Sekarang
+                    </button>
+                </div>
+
+                <div
+                    class="bg-white bg-opacity-20 backdrop-blur-sm rounded-3xl p-8 hover:bg-opacity-30 transition-all duration-300">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Beli 2 Gratis 1</h3>
+                            <p class="text-purple-100">Untuk semua produk roti dan kue</p>
+                        </div>
+                        <div class="text-6xl">🧁</div>
+                    </div>
+                    <button
+                        class="bg-white text-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-purple-50 transition-colors duration-200">
+                        Ambil Promo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Kata Pelanggan</h2>
+                <p class="text-gray-600 text-lg">Kepuasan pelanggan adalah prioritas utama kami</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 text-yellow-400">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Produk selalu segar dan berkualitas. Pelayanan sangat
+                        memuaskan, pengiriman juga cepat. Sudah jadi langganan tetap!"</p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                            S</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Sari Wijaya</h4>
+                            <p class="text-sm text-gray-500">Pelanggan Setia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 text-yellow-400">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Harga terjangkau dengan kualitas premium. Staff ramah dan
+                        helpful. Tempatnya juga bersih dan nyaman untuk berbelanja."</p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center text-white font-bold">
+                            B</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Budi Santoso</h4>
+                            <p class="text-sm text-gray-500">Pembeli Regular</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-1 text-yellow-400">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Aplikasi mobile-nya user friendly, promo sering ada, dan
+                        produk organiknya lengkap. Recommended banget!"</p>
+                    <div class="flex items-center">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-pink-400 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+                            L</div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Lisa Amanda</h4>
+                            <p class="text-sm text-gray-500">Happy Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Mengapa Pilih FreshMart?</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">Kami berkomitmen memberikan pengalaman belanja
+                    terbaik dengan berbagai keunggulan yang kami tawarkan</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Kualitas Terjamin</h3>
+                    <p class="text-gray-600">Semua produk melalui quality control ketat untuk memastikan kesegaran dan
+                        kualitas terbaik</p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Pengiriman Cepat</h3>
+                    <p class="text-gray-600">Layanan delivery express dalam 2-4 jam untuk area Bekasi dan sekitarnya</p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Harga Kompetitif</h3>
+                    <p class="text-gray-600">Harga terbaik dengan berbagai promo menarik dan program loyalitas pelanggan
+                    </p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Support 24/7</h3>
+                    <p class="text-gray-600">Tim customer service siap membantu Anda kapan saja melalui berbagai channel
+                        komunikasi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog/Tips Section -->
+    <section class="py-16 bg-gradient-to-br from-gray-100 to-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Tips & Artikel</h2>
+                <p class="text-gray-600 text-lg">Dapatkan tips berguna seputar makanan sehat dan gaya hidup</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <article
+                    class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-green-200 to-emerald-300 flex items-center justify-center">
+                        <span class="text-6xl">🥗</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>25 Juli 2025</span>
+                            <span class="mx-2">•</span>
+                            <span>5 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">10 Sayuran Organik Terbaik untuk Kesehatan</h3>
+                        <p class="text-gray-600 mb-4">Pelajari manfaat sayuran organik dan cara memilih yang terbaik
+                            untuk keluarga Anda...</p>
+                        <a href="#" class="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">Baca
+                            Selengkapnya →</a>
+                    </div>
+                </article>
+
+                <article
+                    class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-orange-200 to-red-300 flex items-center justify-center">
+                        <span class="text-6xl">🍎</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>23 Juli 2025</span>
+                            <span class="mx-2">•</span>
+                            <span>3 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Cara Menyimpan Buah Agar Tahan Lama</h3>
+                        <p class="text-gray-600 mb-4">Tips praktis untuk menjaga kesegaran buah-buahan di rumah dengan
+                            teknik penyimpanan yang tepat...</p>
+                        <a href="#" class="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">Baca
+                            Selengkapnya →</a>
+                    </div>
+                </article>
+
+                <article
+                    class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-purple-200 to-pink-300 flex items-center justify-center">
+                        <span class="text-6xl">🥛</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>20 Juli 2025</span>
+                            <span class="mx-2">•</span>
+                            <span>4 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Manfaat Produk Dairy untuk Tumbuh Kembang Anak
+                        </h3>
+                        <p class="text-gray-600 mb-4">Pentingnya asupan kalsium dan protein dari produk dairy untuk
+                            mendukung pertumbuhan optimal...</p>
+                        <a href="#" class="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">Baca
+                            Selengkapnya →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Fresh Arrivals -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Produk Segar Hari Ini</h2>
+                <p class="text-gray-600 text-lg">Datang langsung dari petani, segar setiap hari</p>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl p-8 text-white mb-12 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-10 rounded-full -ml-12 -mb-12"></div>
+                <div class="relative z-10">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-4">🌅 Fresh Morning Harvest</h3>
+                            <p class="text-emerald-100 text-lg mb-6">Produk segar dipetik pagi ini, langsung tersedia
+                                untuk Anda. Kesegaran terjamin!</p>
+                            <button
+                                class="bg-white text-emerald-600 px-8 py-3 rounded-full font-semibold hover:bg-emerald-50 transition-colors duration-200">
+                                Lihat Produk Fresh
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white bg-opacity-20 rounded-2xl p-4 text-center backdrop-blur-sm">
+                                <div class="text-3xl mb-2">🥬</div>
+                                <p class="font-semibold">Sayuran</p>
+                                <p class="text-xs text-emerald-100">Baru dipetik</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-2xl p-4 text-center backdrop-blur-sm">
+                                <div class="text-3xl mb-2">🍓</div>
+                                <p class="font-semibold">Buah Berry</p>
+                                <p class="text-xs text-emerald-100">Super fresh</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-2xl p-4 text-center backdrop-blur-sm">
+                                <div class="text-3xl mb-2">🥕</div>
+                                <p class="font-semibold">Root Veggies</p>
+                                <p class="text-xs text-emerald-100">Organik</p>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-2xl p-4 text-center backdrop-blur-sm">
+                                <div class="text-3xl mb-2">🌿</div>
+                                <p class="font-semibold">Herbs</p>
+                                <p class="text-xs text-emerald-100">Aromatik</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Brands -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Brand Partner Terpercaya</h2>
+                <p class="text-gray-600 text-lg">Bekerja sama dengan merek-merek terbaik untuk kualitas premium</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center group">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-white font-bold text-xl">A</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">AgroFresh</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center group">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-white font-bold text-xl">O</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">OrganicPro</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center group">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-white font-bold text-xl">F</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">FarmDirect</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center group">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-white font-bold text-xl">P</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">PureDairy</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center group">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-white font-bold text-xl">B</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">BakeryPlus</p>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex items-center justify-center group">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-white font-bold text-xl">H</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">HealthySnack</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile App Promotion -->
+    <section
+        class="py-16 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-white opacity-5 rounded-full"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white opacity-5 rounded-full"></div>
+            <div class="absolute top-3/4 left-1/2 w-32 h-32 bg-white opacity-5 rounded-full"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Belanja Lebih Mudah dengan
+                        <span class="text-yellow-300">App Mobile</span>
+                    </h2>
+                    <p class="text-purple-100 text-lg mb-8 leading-relaxed">
+                        Download aplikasi FreshMart dan nikmati kemudahan berbelanja kapan saja, di mana saja.
+                        Dapatkan notifikasi promo eksklusif dan pengalaman belanja yang lebih personal.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Push Notifications</p>
+                                <p class="text-sm text-purple-200">Promo & update terbaru</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Location Tracking</p>
+                                <p class="text-sm text-purple-200">Delivery real-time</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Wishlist</p>
+                                <p class="text-sm text-purple-200">Simpan produk favorit</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Loyalty Points</p>
+                                <p class="text-sm text-purple-200">Earn & redeem rewards</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button
+                            class="bg-black text-white px-6 py-3 rounded-2xl flex items-center space-x-3 hover:bg-gray-900 transition-colors duration-200">
+                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                            </svg>
+                            <div class="text-left">
+                                <p class="text-xs">Download on the</p>
+                                <p class="font-semibold">App Store</p>
+                            </div>
+                        </button>
+
+                        <button
+                            class="bg-black text-white px-6 py-3 rounded-2xl flex items-center space-x-3 hover:bg-gray-900 transition-colors duration-200">
+                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                            </svg>
+                            <div class="text-left">
+                                <p class="text-xs">Get it on</p>
+                                <p class="font-semibold">Google Play</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div
+                        class="bg-white bg-opacity-10 backdrop-blur-sm rounded-3xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <div class="bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl p-6 text-center">
+                            <div class="text-6xl mb-4">📱</div>
+                            <h3 class="text-xl font-bold text-white mb-2">FreshMart Mobile</h3>
+                            <p class="text-emerald-100 text-sm mb-4">Belanja pintar, hidup sehat</p>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-3">
+                                <p class="text-xs text-emerald-100">★★★★★ 4.8 Rating</p>
+                                <p class="text-xs text-emerald-100">50K+ Downloads</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Pertanyaan yang Sering Diajukan</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Temukan jawaban untuk pertanyaan umum seputar layanan
+                    FreshMart</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <div
+                        class="bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-colors duration-200 cursor-pointer group">
+                        <div class="flex items-center justify-between">
+                            <h3
+                                class="text-lg font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">
+                                Bagaimana cara menjamin kesegaran produk?
+                            </h3>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-600 mt-3 hidden group-hover:block">
+                            Kami bekerja sama langsung dengan petani lokal dan memiliki sistem cold chain yang terjaga
+                            dari farm ke tangan Anda.
+                            Setiap produk melewati quality control ketat sebelum dipajang.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-colors duration-200 cursor-pointer group">
+                        <div class="flex items-center justify-between">
+                            <h3
+                                class="text-lg font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">
+                                Apakah ada jaminan jika produk tidak memuaskan?
+                            </h3>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-600 mt-3 hidden group-hover:block">
+                            Ya! Kami memiliki kebijakan 100% money back guarantee. Jika Anda tidak puas dengan kualitas
+                            produk,
+                            hubungi customer service dalam 24 jam untuk pengembalian atau penggantian gratis.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-colors duration-200 cursor-pointer group">
+                        <div class="flex items-center justify-between">
+                            <h3
+                                class="text-lg font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">
+                                Berapa lama waktu pengiriman?
+                            </h3>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-600 mt-3 hidden group-hover:block">
+                            Untuk area Bekasi dan sekitarnya, kami menyediakan delivery dalam 2-4 jam. Same day delivery
+                            tersedia untuk
+                            pemesanan sebelum jam 2 siang. Area lain membutuhkan 1-2 hari kerja.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-colors duration-200 cursor-pointer group">
+                        <div class="flex items-center justify-between">
+                            <h3
+                                class="text-lg font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">
+                                Apakah tersedia layanan membership?
+                            </h3>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-600 mt-3 hidden group-hover:block">
+                            Ya! FreshMart Premium membership memberikan benefit seperti free delivery, early access ke
+                            promo,
+                            cashback 5%, dan prioritas customer service dengan biaya Rp 99.000/tahun.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-colors duration-200 cursor-pointer group">
+                        <div class="flex items-center justify-between">
+                            <h3
+                                class="text-lg font-semibold text-gray-800 group-hover:text-emerald-600 transition-colors">
+                                Bagaimana cara melacak pesanan?
+                            </h3>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        <p class="text-gray-600 mt-3 hidden group-hover:block">
+                            Setelah checkout, Anda akan mendapat nomor tracking via SMS dan email. Real-time tracking
+                            tersedia
+                            di mobile app atau website dengan update status dari packing hingga delivery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Locations -->
+    <section class="py-16 bg-gradient-to-br from-emerald-50 to-teal-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Lokasi Toko Kami</h2>
+                <p class="text-gray-600 text-lg">Kunjungi outlet FreshMart terdekat untuk pengalaman berbelanja langsung
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                    <div class="flex items-center justify-between mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">Main
+                            Store</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">FreshMart Bekasi Central</h3>
+                    <div class="space-y-3 text-gray-600">
+                        <div class="flex items-start space-x-3">
+                            <svg class="w-5 h-5 mt-0.5 text-emerald-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                            </svg>
+                            <p>Jl. Ahmad Yani No. 123, Bekasi Timur, Jawa Barat 17112</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p>Senin - Minggu: 07:00 - 22:00</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <p>(021) 8765-4321</p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full mt-6 bg-emerald-600 text-white py-3 rounded-xl font-semibold hover:bg-emerald-700 transition-colors duration-200">
+                        Lihat di Maps
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                    <div class="flex items-center justify-between mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">Express
+                            Store</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">FreshMart Mall Bekasi</h3>
+                    <div class="space-y-3 text-gray-600">
+                        <div class="flex items-start space-x-3">
+                            <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                            </svg>
+                            <p>Metropolitan Mall Lt. 1, Jl. KH. Noer Ali, Bekasi Selatan</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p>Senin - Minggu: 10:00 - 22:00</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <p>(021) 8765-4322</p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full mt-6 bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors duration-200">
+                        Lihat di Maps
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                    <div class="flex items-center justify-between mb-6">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Coming
+                            Soon</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">FreshMart Summarecon</h3>
+                    <div class="space-y-3 text-gray-600">
+                        <div class="flex items-start space-x-3">
+                            <svg class="w-5 h-5 mt-0.5 text-purple-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                            </svg>
+                            <p>Summarecon Mall Bekasi Lt. GF, Bekasi Utara</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <p>Pembukaan: Agustus 2025</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p>Pre-order tersedia sekarang</p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full mt-6 bg-purple-600 text-white py-3 rounded-xl font-semibold hover:bg-purple-700 transition-colors duration-200">
+                        Notify Me
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Section -->
+    <section
+        class="py-16 bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 text-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                <div class="absolute top-1/4 left-1/6 text-8xl">🌱</div>
+                <div class="absolute bottom-1/4 right-1/6 text-6xl">🌍</div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-9xl opacity-50">
+                    ♻️</div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Komitmen Lingkungan</h2>
+                <p class="text-green-100 text-lg max-w-3xl mx-auto leading-relaxed">
+                    Kami berkomitmen untuk menjaga kelestarian lingkungan melalui praktik bisnis yang berkelanjutan
+                    dan mendukung ekonomi hijau untuk masa depan yang lebih baik.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                        <span class="text-3xl">🌱</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">100% Organik</h3>
+                    <p class="text-green-100">Produk organik tanpa pestisida berbahaya untuk kesehatan keluarga</p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                        <span class="text-3xl">📦</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Zero Waste</h3>
+                    <p class="text-green-100">Kemasan ramah lingkungan dan program daur ulang untuk mengurangi sampah
+                    </p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                        <span class="text-3xl">🚲</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Eco Delivery</h3>
+                    <p class="text-green-100">Pengiriman dengan kendaraan ramah lingkungan untuk mengurangi emisi karbon
+                    </p>
+                </div>
+
+                <div class="text-center group">
+                    <div
+                        class="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                        <span class="text-3xl">🤝</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Local Support</h3>
+                    <p class="text-green-100">Mendukung petani lokal dan komunitas untuk ekonomi yang berkelanjutan</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button
+                    class="bg-white text-green-600 px-8 py-4 rounded-2xl font-semibold hover:bg-green-50 transition-colors duration-200 shadow-lg">
+                    Pelajari Lebih Lanjut
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">F</span>
+                        </div>
+                        <span class="text-2xl font-bold">FreshMart</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Minimart modern dengan produk segar berkualitas tinggi untuk kebutuhan
+                        sehari-hari Anda.</p>
+                    <div class="flex space-x-4">
+                        <button
+                            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors duration-200">
+                            <span class="text-sm">f</span>
+                        </button>
+                        <button
+                            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors duration-200">
+                            <span class="text-sm">t</span>
+                        </button>
+                        <button
+                            class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors duration-200">
+                            <span class="text-sm">i</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kategori</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Buah & Sayuran</a>
+                        </li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Susu & Dairy</a>
+                        </li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Roti & Kue</a>
+                        </li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Minuman</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Snack</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Delivery</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Pickup</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Customer
+                                Service</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">Return Policy</a>
+                        </li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors duration-200">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+                    <div class="space-y-3 text-gray-400">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>Jl. Raya No. 123, Bekasi</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                            <span>+62 812-3456-7890</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            <span>info@freshmart.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 FreshMart. All rights reserved. Made with ❤️ for better shopping experience.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('shadow-xl');
+            } else {
+                header.classList.remove('shadow-xl');
+            }
+        });
+
+        // Add to cart animation
+        document.querySelectorAll('button').forEach(button => {
+            if (button.querySelector('svg')) {
+                button.addEventListener('click', function () {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all product cards and sections
+        document.querySelectorAll('.bg-white.rounded-2xl, section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Cart counter animation
+        let cartCount = 3;
+        function updateCartCount() {
+            const cartBadge = document.querySelector('.bg-red-500');
+            cartBadge.textContent = cartCount;
+            cartBadge.classList.add('animate-bounce');
+            setTimeout(() => {
+                cartBadge.classList.remove('animate-bounce');
+            }, 1000);
+        }
+
+        // Product card hover effects
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-5px)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Mobile menu toggle (if needed)
+        const mobileMenuBtn = document.createElement('button');
+        mobileMenuBtn.className = 'md:hidden p-2 text-gray-700';
+        mobileMenuBtn.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        `;
+
+        // Add mobile menu button to header
+        const headerDiv = document.querySelector('header .flex');
+        headerDiv.appendChild(mobileMenuBtn);
+
+        // Search functionality
+        const searchInput = document.querySelector('input[type="text"]');
+        if (searchInput) {
+            searchInput.addEventListener('focus', function () {
+                this.parentElement.classList.add('ring-2', 'ring-emerald-500');
+            });
+
+            searchInput.addEventListener('blur', function () {
+                this.parentElement.classList.remove('ring-2', 'ring-emerald-500');
+            });
+        }
+
+        // Promo countdown timer (example)
+        function startCountdown() {
+            const now = new Date().getTime();
+            const endTime = now + (24 * 60 * 60 * 1000); // 24 hours from now
+
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // You can add a countdown display here if needed
+                if (distance < 0) {
+                    clearInterval(timer);
+                }
+            }, 1000);
+        }
+
+        startCountdown();
+
+        // Loading animation for page load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add click handlers for product cards
+        document.querySelectorAll('.bg-emerald-600.text-white.p-2.rounded-full').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                cartCount++;
+                updateCartCount();
+
+                // Show success message
+                const toast = document.createElement('div');
+                toast.className = 'fixed top-20 right-4 bg-emerald-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+                toast.textContent = 'Produk ditambahkan ke keranjang!';
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(0)';
+                }, 100);
+
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(full)';
+                    setTimeout(() => {
+                        document.body.removeChild(toast);
+                    }, 300);
+                }, 2000);
+            });
+        });
+
+        // Newsletter subscription (example)
+        function createNewsletterSection() {
+            const newsletterHTML = `
+                <section class="py-16 bg-gray-100">
+                    <div class="container mx-auto px-4 text-center">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Dapatkan Penawaran Terbaru</h2>
+                        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                            Berlangganan newsletter kami dan dapatkan info promo, produk baru, dan tips belanja pintar langsung di email Anda.
+                        </p>
+                        <div class="max-w-md mx-auto flex gap-4">
+                            <input type="email" placeholder="Masukkan email Anda..." 
+                                   class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                            <button class="bg-emerald-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors duration-200 whitespace-nowrap">
+                                Subscribe
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4">
+                            Kami menghargai privasi Anda. Unsubscribe kapan saja.
+                        </p>
+                    </div>
+                </section>
+            `;
+
+            const footer = document.querySelector('footer');
+            footer.insertAdjacentHTML('beforebegin', newsletterHTML);
+        }
+
+        // Add newsletter section
+        createNewsletterSection();
+
+        // Lazy loading for images (if you add real images later)
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('opacity-0');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        // Smooth reveal animations for stats
+        const statsSection = document.querySelector('.grid.grid-cols-2.md\\:grid-cols-4');
+        if (statsSection) {
+            const stats = statsSection.querySelectorAll('.text-center.group');
+            stats.forEach((stat, index) => {
+                stat.style.opacity = '0';
+                stat.style.transform = 'translateY(20px)';
+                stat.style.transition = `all 0.6s ease-out ${index * 0.1}s`;
+            });
+
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const stats = entry.target.querySelectorAll('.text-center.group');
+                        stats.forEach(stat => {
+                            stat.style.opacity = '1';
+                            stat.style.transform = 'translateY(0)';
+                        });
+                    }
+                });
+            });
+
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+
+</html>
