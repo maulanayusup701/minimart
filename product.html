@@ -15,7 +15,8 @@
                         'slide-up': 'slideUp 0.6s ease-out',
                         'bounce-light': 'bounceLight 2s infinite',
                         'pulse-slow': 'pulse 3s infinite',
-                        'filter-slide': 'filterSlide 0.3s ease-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                        'slide-up-fast': 'slideUpFast 0.3s ease-out',
                     },
                     keyframes: {
                         fadeIn: {
@@ -26,13 +27,17 @@
                             '0%': { transform: 'translateY(20px)', opacity: '0' },
                             '100%': { transform: 'translateY(0)', opacity: '1' }
                         },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideUpFast: {
+                            '0%': { transform: 'translateY(0)', opacity: '1' },
+                            '100%': { transform: 'translateY(-100%)', opacity: '0' }
+                        },
                         bounceLight: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-5px)' }
-                        },
-                        filterSlide: {
-                            '0%': { transform: 'translateX(-10px)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' }
                         }
                     }
                 }
@@ -56,23 +61,25 @@
                         class="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">FreshMart</span>
                 </div>
 
-                <!-- Navigation -->
+                <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#"
+                    <a href="index.html"
                         class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Beranda</a>
-                    <a href="#" class="text-emerald-600 font-semibold border-b-2 border-emerald-600">Produk</a>
+                    <a href="product.html"
+                        class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Product</a>
                     <a href="#"
                         class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Promo</a>
                     <a href="#"
                         class="text-gray-700 hover:text-emerald-600 transition-colors duration-200 font-medium">Kontak</a>
                 </nav>
 
-                <!-- Search & Cart -->
+                <!-- Search, Cart & Mobile Menu -->
                 <div class="flex items-center space-x-4">
+                    <!-- Search -->
                     <div class="relative hidden sm:block">
-                        <input type="text" id="searchInput" placeholder="Cari produk..."
+                        <input type="text" placeholder="Cari produk..." id="searchInput"
                             class="w-64 px-4 py-2 pr-10 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200">
-                        <button
+                        <button id="searchBtn"
                             class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-emerald-600 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -80,25 +87,131 @@
                             </svg>
                         </button>
                     </div>
-                    <button class="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200">
+
+                    <!-- Cart -->
+                    <button id="cartBtn"
+                        class="relative p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4m15.6 0L7 13m0 0L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H19M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z">
                             </path>
                         </svg>
-                        <span id="cartBadge"
+                        <span id="cartCount"
                             class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn"
+                        class="md:hidden p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200">
+                        <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden">
+                <nav class="px-2 pt-2 pb-4 space-y-1 bg-white border-t border-gray-200 animate-slide-down">
+                    <a href="#"
+                        class="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all duration-200">Beranda</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all duration-200">Kategori</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all duration-200">Promo</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all duration-200">Kontak</a>
+
+                    <!-- Mobile Search -->
+                    <div class="px-3 py-2">
+                        <div class="relative">
+                            <input type="text" placeholder="Cari produk..."
+                                class="w-full px-4 py-2 pr-10 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                            <button
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-emerald-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed inset-0 z-[60] hidden">
+        <!-- Backdrop -->
+        <div id="cartBackdrop" class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300"></div>
+
+        <!-- Sidebar -->
+        <div id="cartPanel"
+            class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <!-- Header -->
+                <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-gray-800">Keranjang Belanja</h2>
+                    <button id="closeCart" class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Cart Items -->
+                <div class="flex-1 overflow-y-auto p-6">
+                    <div id="cartItems" class="space-y-4">
+                        <!-- Cart items will be inserted here -->
+                    </div>
+
+                    <!-- Empty cart message -->
+                    <div id="emptyCart" class="text-center py-12">
+                        <div class="text-6xl mb-4">🛒</div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">Keranjang Kosong</h3>
+                        <p class="text-gray-600">Belum ada produk yang ditambahkan</p>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div id="cartFooter" class="hidden border-t border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-lg font-semibold text-gray-800">Total:</span>
+                        <span id="cartTotal" class="text-xl font-bold text-emerald-600">Rp 0</span>
+                    </div>
+                    <button
+                        class="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors duration-200">
+                        Checkout
                     </button>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast"
+        class="fixed top-20 right-0 bg-emerald-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300">
+        <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span id="toastMessage">Produk ditambahkan ke keranjang!</span>
+        </div>
+    </div>
 
     <!-- Breadcrumb -->
     <section class="bg-gradient-to-r from-emerald-100 to-teal-100 py-6">
         <div class="container mx-auto px-4">
             <div class="flex items-center space-x-2 text-sm">
-                <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-colors">Beranda</a>
+                <a href="index.html" class="text-emerald-600 hover:text-emerald-700 transition-colors">Beranda</a>
                 <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
@@ -452,4 +565,847 @@
             { id: 5, name: 'Kubis Ungu', category: 'vegetables', price: 10000, brand: 'organic', image: '🥬', rating: 4.5, discount: 5, isNew: false, description: 'Kubis ungu segar dan renyah' },
 
             // Buah-buahan
-            { id: 6, name: 'Apel Fuji Premium', category: 'fruits', price: 35000, brand: 'organic',
+            { id: 6, name: 'Apel Fuji Premium', category: 'fruits', price: 35000, brand: 'organic', image: '🍎', rating: 4.9, discount: 20, isNew: true, description: 'Apel Fuji import premium manis dan renyah' },
+            { id: 7, name: 'Pisang Cavendish', category: 'fruits', price: 22000, brand: 'farm', image: '🍌', rating: 4.7, discount: 0, isNew: false, description: 'Pisang Cavendish matang sempurna' },
+            { id: 8, name: 'Jeruk Valencia', category: 'fruits', price: 28000, brand: 'organic', image: '🍊', rating: 4.8, discount: 10, isNew: false, description: 'Jeruk Valencia segar kaya vitamin C' },
+            { id: 9, name: 'Strawberry Organik', category: 'fruits', price: 45000, brand: 'organic', image: '🍓', rating: 4.9, discount: 25, isNew: true, description: 'Strawberry organik segar dan manis' },
+            { id: 10, name: 'Anggur Hijau', category: 'fruits', price: 55000, brand: 'farm', image: '🍇', rating: 4.6, discount: 0, isNew: false, description: 'Anggur hijau tanpa biji premium' },
+
+            // Dairy
+            { id: 11, name: 'Susu Ultra Fresh', category: 'dairy', price: 18000, brand: 'pure', image: '🥛', rating: 4.8, discount: 0, isNew: false, description: 'Susu segar berkualitas tinggi 1L' },
+            { id: 12, name: 'Keju Cheddar', category: 'dairy', price: 42000, brand: 'pure', image: '🧀', rating: 4.7, discount: 15, isNew: false, description: 'Keju cheddar premium untuk sandwich' },
+            { id: 13, name: 'Yogurt Yunani', category: 'dairy', price: 25000, brand: 'pure', image: '🥛', rating: 4.9, discount: 20, isNew: true, description: 'Yogurt Yunani rendah lemak tinggi protein' },
+            { id: 14, name: 'Mentega Organik', category: 'dairy', price: 32000, brand: 'organic', image: '🧈', rating: 4.6, discount: 0, isNew: false, description: 'Mentega organik untuk memasak dan baking' },
+
+            // Roti & Kue
+            { id: 15, name: 'Roti Gandum Utuh', category: 'bakery', price: 15000, brand: 'organic', image: '🍞', rating: 4.7, discount: 10, isNew: false, description: 'Roti gandum utuh tinggi serat' },
+            { id: 16, name: 'Croissant Premium', category: 'bakery', price: 28000, brand: 'farm', image: '🥐', rating: 4.8, discount: 0, isNew: true, description: 'Croissant butter premium renyah' },
+            { id: 17, name: 'Muffin Blueberry', category: 'bakery', price: 22000, brand: 'organic', image: '🧁', rating: 4.6, discount: 15, isNew: false, description: 'Muffin blueberry lembut dan manis' },
+            { id: 18, name: 'Bagel Sesame', category: 'bakery', price: 18000, brand: 'farm', image: '🥯', rating: 4.5, discount: 0, isNew: false, description: 'Bagel dengan taburan biji wijen' },
+
+            // Minuman
+            { id: 19, name: 'Jus Jeruk Fresh', category: 'beverages', price: 12000, brand: 'organic', image: '🧃', rating: 4.8, discount: 0, isNew: false, description: 'Jus jeruk segar tanpa pengawet 500ml' },
+            { id: 20, name: 'Air Mineral Premium', category: 'beverages', price: 8000, brand: 'pure', image: '💧', rating: 4.7, discount: 5, isNew: false, description: 'Air mineral premium 1.5L' },
+            { id: 21, name: 'Teh Hijau Organik', category: 'beverages', price: 25000, brand: 'organic', image: '🍵', rating: 4.9, discount: 20, isNew: true, description: 'Teh hijau organik premium kemasan 100gr' },
+            { id: 22, name: 'Kopi Arabica', category: 'beverages', price: 65000, brand: 'farm', image: '☕', rating: 4.8, discount: 10, isNew: false, description: 'Kopi arabica single origin 250gr' },
+
+            // Snack
+            { id: 23, name: 'Keripik Kentang', category: 'snacks', price: 15000, brand: 'organic', image: '🍟', rating: 4.6, discount: 0, isNew: false, description: 'Keripik kentang renyah rendah garam' },
+            { id: 24, name: 'Kacang Almond', category: 'snacks', price: 45000, brand: 'organic', image: '🥜', rating: 4.9, discount: 15, isNew: true, description: 'Kacang almond panggang tanpa garam 200gr' },
+            { id: 25, name: 'Biskuit Oat', category: 'snacks', price: 18000, brand: 'farm', image: '🍪', rating: 4.5, discount: 0, isNew: false, description: 'Biskuit oat sehat tinggi serat' },
+            { id: 26, name: 'Trail Mix', category: 'snacks', price: 35000, brand: 'organic', image: '🥜', rating: 4.7, discount: 25, isNew: true, description: 'Campuran kacang dan buah kering premium' }
+        ];
+
+        // Global state variables
+        let filteredProducts = [...products];
+        let cart = [];
+        let currentView = 'grid';
+        let isCartOpen = false;
+        let isMobileMenuOpen = false;
+
+        // DOM Elements (will be initialized after DOM is loaded)
+        let elements = {};
+
+        // Initialize DOM elements
+        function initializeElements() {
+            elements = {
+                // Product elements
+                productsContainer: document.getElementById('productsContainer'),
+                productCountElement: document.getElementById('productCount'),
+                searchInput: document.getElementById('searchInput'),
+                sortSelect: document.getElementById('sortSelect'),
+                clearFiltersBtn: document.getElementById('clearFilters'),
+                gridViewBtn: document.getElementById('gridView'),
+                listViewBtn: document.getElementById('listView'),
+                loadingState: document.getElementById('loadingState'),
+                noResults: document.getElementById('noResults'),
+                searchBtn: document.getElementById('searchBtn'),
+
+                // Navigation elements
+                mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+                mobileMenu: document.getElementById('mobileMenu'),
+                hamburgerIcon: document.getElementById('hamburgerIcon'),
+                closeIcon: document.getElementById('closeIcon'),
+
+                // Cart elements
+                cartBtn: document.getElementById('cartBtn'),
+                cartSidebar: document.getElementById('cartSidebar'),
+                cartPanel: document.getElementById('cartPanel'),
+                cartBackdrop: document.getElementById('cartBackdrop'),
+                closeCart: document.getElementById('closeCart'),
+                cartCount: document.getElementById('cartCount'),
+                cartBadge: document.getElementById('cartBadge'),
+                cartItems: document.getElementById('cartItems'),
+                emptyCart: document.getElementById('emptyCart'),
+                cartFooter: document.getElementById('cartFooter'),
+                cartTotal: document.getElementById('cartTotal'),
+
+                // Toast elements
+                toast: document.getElementById('toast'),
+                toastMessage: document.getElementById('toastMessage')
+            };
+        }
+
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            if (!elements.mobileMenu) return;
+
+            isMobileMenuOpen = !isMobileMenuOpen;
+
+            if (isMobileMenuOpen) {
+                elements.mobileMenu.classList.remove('hidden');
+                if (elements.hamburgerIcon) elements.hamburgerIcon.classList.add('hidden');
+                if (elements.closeIcon) elements.closeIcon.classList.remove('hidden');
+                elements.mobileMenu.classList.add('animate-slide-down');
+            } else {
+                if (elements.hamburgerIcon) elements.hamburgerIcon.classList.remove('hidden');
+                if (elements.closeIcon) elements.closeIcon.classList.add('hidden');
+                elements.mobileMenu.classList.add('animate-slide-up-fast');
+
+                setTimeout(() => {
+                    elements.mobileMenu.classList.add('hidden');
+                    elements.mobileMenu.classList.remove('animate-slide-down', 'animate-slide-up-fast');
+                }, 300);
+            }
+        }
+
+        // Cart Functions
+        function toggleCart() {
+            if (!elements.cartSidebar) return;
+
+            isCartOpen = !isCartOpen;
+
+            if (isCartOpen) {
+                elements.cartSidebar.classList.remove('hidden');
+                setTimeout(() => {
+                    if (elements.cartPanel) elements.cartPanel.classList.remove('translate-x-full');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                closeCartSidebar();
+            }
+        }
+
+        function closeCartSidebar() {
+            if (!elements.cartPanel || !elements.cartSidebar) return;
+
+            elements.cartPanel.classList.add('translate-x-full');
+            setTimeout(() => {
+                elements.cartSidebar.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+            isCartOpen = false;
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1,
+                    cartId: Date.now() + Math.random() // Unique cart ID
+                });
+            }
+
+            updateCartUI();
+            showToast(`${product.name} ditambahkan ke keranjang!`);
+        }
+
+        function removeFromCart(cartId) {
+            cart = cart.filter(item => item.cartId !== cartId);
+            updateCartUI();
+        }
+
+        function updateQuantity(cartId, newQuantity) {
+            if (newQuantity <= 0) {
+                removeFromCart(cartId);
+                return;
+            }
+
+            const item = cart.find(item => item.cartId === cartId);
+            if (item) {
+                item.quantity = newQuantity;
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Update cart count badges
+            [elements.cartCount, elements.cartBadge].forEach(element => {
+                if (element) {
+                    element.textContent = totalItems;
+                    element.classList.remove('animate-pulse');
+                    if (totalItems > 0) {
+                        element.classList.add('animate-bounce');
+                        setTimeout(() => element.classList.remove('animate-bounce'), 1000);
+                    }
+                }
+            });
+
+            // Update cart items display
+            if (!elements.cartItems) return;
+
+            if (cart.length === 0) {
+                if (elements.emptyCart) elements.emptyCart.classList.remove('hidden');
+                if (elements.cartFooter) elements.cartFooter.classList.add('hidden');
+                elements.cartItems.innerHTML = '';
+            } else {
+                if (elements.emptyCart) elements.emptyCart.classList.add('hidden');
+                if (elements.cartFooter) elements.cartFooter.classList.remove('hidden');
+
+                elements.cartItems.innerHTML = cart.map(item => `
+            <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                <div class="text-2xl">${item.image}</div>
+                <div class="flex-1">
+                    <h4 class="font-semibold text-gray-800">${item.name}</h4>
+                    <p class="text-emerald-600 font-bold">Rp ${formatPrice(item.price)}</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="updateQuantity(${item.cartId}, ${item.quantity - 1})" 
+                            class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
+                        <span class="text-gray-600">-</span>
+                    </button>
+                    <span class="w-8 text-center font-semibold">${item.quantity}</span>
+                    <button onclick="updateQuantity(${item.cartId}, ${item.quantity + 1})" 
+                            class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition-colors">
+                        <span class="text-gray-600">+</span>
+                    </button>
+                    <button onclick="removeFromCart(${item.cartId})" 
+                            class="ml-2 text-red-500 hover:text-red-700 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+                if (elements.cartTotal) {
+                    elements.cartTotal.textContent = `Rp ${formatPrice(totalPrice)}`;
+                }
+            }
+        }
+
+        function showToast(message) {
+            if (elements.toast && elements.toastMessage) {
+                elements.toastMessage.textContent = message;
+                elements.toast.classList.remove('translate-x-full');
+
+                setTimeout(() => {
+                    elements.toast.classList.add('translate-x-full');
+                }, 3000);
+            } else {
+                // Fallback toast creation
+                const toast = document.createElement('div');
+                toast.className = 'fixed top-20 right-4 bg-emerald-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                setTimeout(() => toast.style.transform = 'translateX(0)', 100);
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(100%)';
+                    setTimeout(() => document.body.removeChild(toast), 300);
+                }, 3000);
+            }
+        }
+
+        // Product filtering and display functions
+        function applyFilters() {
+            showLoading();
+
+            setTimeout(() => {
+                const selectedCategory = document.querySelector('.category-filter:checked')?.value || 'all';
+                const selectedPrices = Array.from(document.querySelectorAll('.price-filter:checked')).map(cb => cb.value);
+                const selectedBrands = Array.from(document.querySelectorAll('.brand-filter:checked')).map(cb => cb.value);
+                const searchTerm = elements.searchInput?.value.toLowerCase().trim() || '';
+
+                filteredProducts = products.filter(product => {
+                    const categoryMatch = selectedCategory === 'all' || product.category === selectedCategory;
+                    const priceMatch = selectedPrices.length === 0 || selectedPrices.some(range => {
+                        const [min, max] = range.split('-').map(Number);
+                        return product.price >= min && product.price <= max;
+                    });
+                    const brandMatch = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+                    const searchMatch = searchTerm === '' ||
+                        product.name.toLowerCase().includes(searchTerm) ||
+                        product.description.toLowerCase().includes(searchTerm);
+
+                    return categoryMatch && priceMatch && brandMatch && searchMatch;
+                });
+
+                applySorting();
+                hideLoading();
+            }, 500);
+        }
+
+        function applySorting() {
+            if (!elements.sortSelect) return;
+
+            const sortValue = elements.sortSelect.value;
+
+            switch (sortValue) {
+                case 'name-asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'price-asc':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'newest':
+                    filteredProducts.sort((a, b) => b.isNew - a.isNew);
+                    break;
+                case 'popular':
+                    filteredProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+            }
+
+            renderProducts();
+        }
+
+        function renderProducts() {
+            if (!elements.productsContainer) return;
+
+            if (elements.productCountElement) {
+                elements.productCountElement.textContent = filteredProducts.length;
+            }
+
+            if (filteredProducts.length === 0) {
+                elements.productsContainer.classList.add('hidden');
+                if (elements.noResults) elements.noResults.classList.remove('hidden');
+                return;
+            }
+
+            elements.productsContainer.classList.remove('hidden');
+            if (elements.noResults) elements.noResults.classList.add('hidden');
+
+            if (currentView === 'grid') {
+                renderGridView();
+            } else {
+                renderListView();
+            }
+        }
+
+        function renderGridView() {
+            if (!elements.productsContainer) return;
+
+            elements.productsContainer.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
+
+            elements.productsContainer.innerHTML = filteredProducts.map(product => `
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group product-card animate-fade-in">
+            <div class="relative overflow-hidden">
+                <div class="h-48 bg-gradient-to-br ${getGradientByCategory(product.category)} flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <span class="text-6xl">${product.image}</span>
+                </div>
+                
+                ${product.discount > 0 ? `
+                    <div class="absolute top-4 left-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                        -${product.discount}%
+                    </div>
+                ` : ''}
+                
+                ${product.isNew ? `
+                    <div class="absolute top-4 right-4 bg-emerald-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                        New
+                    </div>
+                ` : ''}
+            </div>
+            
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs text-gray-500 uppercase tracking-wide">${getBrandName(product.brand)}</span>
+                    <div class="flex items-center text-yellow-400">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                        </svg>
+                        <span class="text-xs text-gray-600 ml-1">${product.rating}</span>
+                    </div>
+                </div>
+                
+                <h3 class="font-semibold text-lg mb-2 text-gray-800 group-hover:text-emerald-600 transition-colors">${product.name}</h3>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.description}</p>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex flex-col">
+                        ${product.discount > 0 ? `
+                            <div class="flex items-center space-x-2">
+                                <span class="text-lg font-bold text-emerald-600">Rp ${formatPrice(calculateDiscountPrice(product.price, product.discount))}</span>
+                                <span class="text-sm text-gray-400 line-through">Rp ${formatPrice(product.price)}</span>
+                            </div>
+                        ` : `
+                            <span class="text-lg font-bold text-emerald-600">Rp ${formatPrice(product.price)}</span>
+                        `}
+                    </div>
+                    
+                    <button onclick="addToCart(${product.id})" class="bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition-colors duration-200 group/btn">
+                        <svg class="w-5 h-5 group-hover/btn:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        function renderListView() {
+            if (!elements.productsContainer) return;
+
+            elements.productsContainer.className = 'space-y-4';
+
+            elements.productsContainer.innerHTML = filteredProducts.map(product => `
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group product-card animate-fade-in">
+            <div class="flex flex-col sm:flex-row">
+                <div class="relative sm:w-48 h-48 overflow-hidden">
+                    <div class="h-full bg-gradient-to-br ${getGradientByCategory(product.category)} flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                        <span class="text-5xl">${product.image}</span>
+                    </div>
+                    
+                    ${product.discount > 0 ? `
+                        <div class="absolute top-4 left-4 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            -${product.discount}%
+                        </div>
+                    ` : ''}
+                    
+                    ${product.isNew ? `
+                        <div class="absolute top-4 right-4 bg-emerald-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                            New
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div class="flex-1 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs text-gray-500 uppercase tracking-wide">${getBrandName(product.brand)}</span>
+                            <div class="flex items-center text-yellow-400">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                    <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                </svg>
+                                <span class="text-xs text-gray-600 ml-1">${product.rating}</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800 group-hover:text-emerald-600 transition-colors">${product.name}</h3>
+                        <p class="text-gray-600 mb-4">${product.description}</p>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            ${product.discount > 0 ? `
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xl font-bold text-emerald-600">Rp ${formatPrice(calculateDiscountPrice(product.price, product.discount))}</span>
+                                    <span class="text-sm text-gray-400 line-through">Rp ${formatPrice(product.price)}</span>
+                                </div>
+                            ` : `
+                                <span class="text-xl font-bold text-emerald-600">Rp ${formatPrice(product.price)}</span>
+                            `}
+                        </div>
+                        
+                        <button onclick="addToCart(${product.id})" class="bg-emerald-600 text-white px-6 py-3 rounded-full hover:bg-emerald-700 transition-colors duration-200 font-semibold">
+                            Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        // Helper Functions
+        function getGradientByCategory(category) {
+            const gradients = {
+                vegetables: 'from-green-100 to-emerald-200',
+                fruits: 'from-red-100 to-pink-200',
+                dairy: 'from-blue-100 to-cyan-200',
+                bakery: 'from-yellow-100 to-orange-200',
+                beverages: 'from-purple-100 to-indigo-200',
+                snacks: 'from-amber-100 to-yellow-200'
+            };
+            return gradients[category] || 'from-gray-100 to-gray-200';
+        }
+
+        function getBrandName(brand) {
+            const brandNames = {
+                organic: 'OrganicFresh',
+                farm: 'FarmDirect',
+                pure: 'PureDairy'
+            };
+            return brandNames[brand] || brand;
+        }
+
+        function formatPrice(price) {
+            return new Intl.NumberFormat('id-ID').format(price);
+        }
+
+        function calculateDiscountPrice(price, discount) {
+            return Math.round(price * (1 - discount / 100));
+        }
+
+        function clearAllFilters() {
+            // Reset category to all
+            const categoryAll = document.querySelector('.category-filter[value="all"]');
+            if (categoryAll) categoryAll.checked = true;
+
+            // Uncheck all price filters
+            document.querySelectorAll('.price-filter').forEach(cb => cb.checked = false);
+
+            // Uncheck all brand filters
+            document.querySelectorAll('.brand-filter').forEach(cb => cb.checked = false);
+
+            // Clear search
+            if (elements.searchInput) elements.searchInput.value = '';
+
+            // Reset sort
+            if (elements.sortSelect) elements.sortSelect.value = 'name-asc';
+
+            // Apply filters
+            applyFilters();
+        }
+
+        function toggleView(view) {
+            currentView = view;
+
+            if (view === 'grid') {
+                if (elements.gridViewBtn) {
+                    elements.gridViewBtn.classList.add('bg-emerald-500', 'text-white');
+                    elements.gridViewBtn.classList.remove('bg-gray-100', 'text-gray-600');
+                }
+                if (elements.listViewBtn) {
+                    elements.listViewBtn.classList.add('bg-gray-100', 'text-gray-600');
+                    elements.listViewBtn.classList.remove('bg-emerald-500', 'text-white');
+                }
+            } else {
+                if (elements.listViewBtn) {
+                    elements.listViewBtn.classList.add('bg-emerald-500', 'text-white');
+                    elements.listViewBtn.classList.remove('bg-gray-100', 'text-gray-600');
+                }
+                if (elements.gridViewBtn) {
+                    elements.gridViewBtn.classList.add('bg-gray-100', 'text-gray-600');
+                    elements.gridViewBtn.classList.remove('bg-emerald-500', 'text-white');
+                }
+            }
+
+            renderProducts();
+        }
+
+        function showLoading() {
+            if (elements.loadingState) elements.loadingState.classList.remove('hidden');
+            if (elements.productsContainer) elements.productsContainer.classList.add('opacity-50');
+        }
+
+        function hideLoading() {
+            if (elements.loadingState) elements.loadingState.classList.add('hidden');
+            if (elements.productsContainer) elements.productsContainer.classList.remove('opacity-50');
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Search functionality
+        function performSearch(query) {
+            if (query.trim()) {
+                showToast(`Mencari: "${query}"`);
+                // Update search input if it exists
+                if (elements.searchInput) {
+                    elements.searchInput.value = query;
+                }
+                applyFilters();
+            }
+        }
+
+        // Event Listeners Setup
+        function setupEventListeners() {
+            // Mobile menu
+            if (elements.mobileMenuBtn) {
+                elements.mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
+
+            // Cart
+            if (elements.cartBtn) {
+                elements.cartBtn.addEventListener('click', toggleCart);
+            }
+            if (elements.closeCart) {
+                elements.closeCart.addEventListener('click', closeCartSidebar);
+            }
+            if (elements.cartBackdrop) {
+                elements.cartBackdrop.addEventListener('click', closeCartSidebar);
+            }
+
+            // Search
+            if (elements.searchInput) {
+                elements.searchInput.addEventListener('input', debounce(applyFilters, 300));
+                elements.searchInput.addEventListener('focus', function () {
+                    this.parentElement.classList.add('ring-2', 'ring-emerald-500');
+                });
+                elements.searchInput.addEventListener('blur', function () {
+                    this.parentElement.classList.remove('ring-2', 'ring-emerald-500');
+                });
+                elements.searchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        performSearch(this.value);
+                    }
+                });
+            }
+
+            if (elements.searchBtn) {
+                elements.searchBtn.addEventListener('click', function () {
+                    const query = elements.searchInput ? elements.searchInput.value : '';
+                    performSearch(query);
+                });
+            }
+
+            // Filters
+            document.querySelectorAll('.category-filter').forEach(radio => {
+                radio.addEventListener('change', applyFilters);
+            });
+
+            document.querySelectorAll('.price-filter').forEach(checkbox => {
+                checkbox.addEventListener('change', applyFilters);
+            });
+
+            document.querySelectorAll('.brand-filter').forEach(checkbox => {
+                checkbox.addEventListener('change', applyFilters);
+            });
+
+            // Sort
+            if (elements.sortSelect) {
+                elements.sortSelect.addEventListener('change', applySorting);
+            }
+
+            // Clear filters
+            if (elements.clearFiltersBtn) {
+                elements.clearFiltersBtn.addEventListener('click', clearAllFilters);
+            }
+
+            // View toggle
+            if (elements.gridViewBtn) {
+                elements.gridViewBtn.addEventListener('click', () => toggleView('grid'));
+            }
+            if (elements.listViewBtn) {
+                elements.listViewBtn.addEventListener('click', () => toggleView('list'));
+            }
+
+            // Add to cart buttons (for statically created buttons)
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const productId = parseInt(this.dataset.productId);
+                    if (productId) {
+                        // Button animation
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 150);
+
+                        addToCart(productId);
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function (e) {
+                if (isMobileMenuOpen && elements.mobileMenu && elements.mobileMenuBtn &&
+                    !elements.mobileMenu.contains(e.target) && !elements.mobileMenuBtn.contains(e.target)) {
+                    toggleMobileMenu();
+                }
+            });
+
+            // Header shadow on scroll
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (header) {
+                    if (window.scrollY > 100) {
+                        header.classList.add('shadow-xl');
+                    } else {
+                        header.classList.remove('shadow-xl');
+                    }
+                }
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function (e) {
+                // Escape key closes cart or mobile menu
+                if (e.key === 'Escape') {
+                    if (isCartOpen) {
+                        closeCartSidebar();
+                    }
+                    if (isMobileMenuOpen) {
+                        toggleMobileMenu();
+                    }
+                }
+
+                // Ctrl/Cmd + K opens search
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    if (elements.searchInput) {
+                        elements.searchInput.focus();
+                    }
+                }
+            });
+
+            // Touch support for mobile swipe gestures
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', function (e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            document.addEventListener('touchend', function (e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                // Swipe left to open cart
+                if (diff > swipeThreshold && !isCartOpen) {
+                    toggleCart();
+                }
+                // Swipe right to close cart
+                else if (diff < -swipeThreshold && isCartOpen) {
+                    closeCartSidebar();
+                }
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Intersection Observer for animations
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for scroll animations
+            document.querySelectorAll('.bg-white.rounded-2xl, section').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease-out';
+                observer.observe(el);
+            });
+        }
+
+        // Product card hover effects
+        function setupHoverEffects() {
+            document.querySelectorAll('.group').forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-5px)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        }
+
+        // Loading animation
+        function setupLoadingAnimation() {
+            window.addEventListener('load', () => {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease-in-out';
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 100);
+            });
+        }
+
+        // Utility function to scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Main initialization function
+        function initializeFreshMart() {
+            // Initialize DOM elements
+            initializeElements();
+
+            // Setup event listeners
+            setupEventListeners();
+
+            // Setup additional features
+            setupSmoothScrolling();
+            setupScrollAnimations();
+            setupHoverEffects();
+            setupLoadingAnimation();
+
+            // Initialize cart UI
+            updateCartUI();
+
+            // Render initial products
+            renderProducts();
+
+            console.log('FreshMart initialized successfully!');
+            console.log('Features available:');
+            console.log('- Working hamburger menu for mobile');
+            console.log('- Functional shopping cart with add/remove/quantity controls');
+            console.log('- Toast notifications');
+            console.log('- Search functionality');
+            console.log('- Product filtering and sorting');
+            console.log('- Grid/List view toggle');
+            console.log('- Keyboard shortcuts (Esc to close, Ctrl+K for search)');
+            console.log('- Touch swipe gestures for cart');
+            console.log('- Smooth animations and transitions');
+        }
+
+        // Initialize when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeFreshMart);
+        } else {
+            // DOM is already loaded
+            initializeFreshMart();
+        }
+    </script>
+</body>
+
+</html>
